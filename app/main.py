@@ -7,6 +7,5 @@ app = FastAPI(
     description="Serviço de fusão de Pokémon utilizando geração de imagens por IA."
 )
 
-# Registrar rotas
-app.include_router(health.router, tags=["health"])
-app.include_router(fuse.router, prefix="/fuse", tags=["fuse"])
+app.include_router(health.router, prefix="/api/v1", tags=["health"])
+app.include_router(fuse.router, prefix="/api/v1/fusions", tags=["fuse"])

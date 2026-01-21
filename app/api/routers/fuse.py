@@ -1,8 +1,11 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas.fusion_request import FusionRequest
-from app.schemas.fusion_response import FusionCreatedResponse, FusionDetailResponse
+
+from app.api.schemas.fusion_request import FusionRequest
+from app.api.schemas.fusion_response import FusionCreatedResponse, FusionDetailResponse
+
 from app.services.prompt_builder import build_prompt
 from app.services.image_generator import enqueue_generation
+
 import uuid
 from datetime import datetime
 
@@ -41,9 +44,7 @@ def create_fusion(req: FusionRequest):
     }
     _fake_db[fusion_id] = record
 
-    # Enfileirar tarefa (stub)
     enqueue_generation(fusion_id, record)
-
     return record
 
 @router.get("/{fusion_id}", response_model=FusionDetailResponse)
