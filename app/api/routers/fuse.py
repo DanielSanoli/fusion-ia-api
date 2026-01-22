@@ -1,10 +1,11 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 
 from app.api.schemas.fusion_request import FusionRequest
 from app.api.schemas.fusion_response import FusionCreatedResponse, FusionDetailResponse
-
 from app.services.prompt_builder import build_prompt
 from app.services.image_generator import enqueue_generation
+from app.core.settings import IMAGE_DIR
 
 import uuid
 from datetime import datetime
@@ -53,3 +54,15 @@ def get_fusion(fusion_id: str):
     if not record:
         raise HTTPException(status_code=404, detail="Fusion not found")
     return record
+
+@router.get("/{fusion_id}/image")
+def get_fusion_image(fusion_id: str):
+    record = _fake_db.get(fusion_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Fusion not found")
+
+    file_path = IMAGE_DIR / f"{fusion_id}.png"
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Image not found")
+
+    return FileResponse(path=str(file_path), media_type="image/png", filename=f"{fusion_id}.png")
