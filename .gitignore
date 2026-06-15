@@ -1,0 +1,15 @@
+target/
+.tools/
+.mvn/wrapper/maven-wrapper.jar
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+.idea/
+*.iml
+*.log
+.DS_Store
+legacy-fastapi/**/__pycache__/
+legacy-fastapi/.venv/
+

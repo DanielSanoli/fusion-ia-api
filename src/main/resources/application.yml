@@ -1,0 +1,22 @@
+server:
+  port: ${SERVER_PORT:8000}
+
+spring:
+  application:
+    name: fusion-ia-api
+
+fusion:
+  provider: ${FUSION_PROVIDER:stub}
+  image-dir: ${FUSION_IMAGE_DIR:app/data/images}
+  rate-limit-per-hour: ${FUSION_RATE_LIMIT_PER_HOUR:10}
+
+# Configuração futura para provider real via Spring AI.
+# Nunca coloque chaves reais neste arquivo. Prefira variáveis de ambiente ou secret manager.
+# spring:
+#   ai:
+#     openai:
+#       api-key: ${SPRING_AI_OPENAI_API_KEY}
+#       image:
+#         options:
+#           model: dall-e-3
+

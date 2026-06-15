@@ -1,21 +1,19 @@
-VENV=.venv
-PY=python
+.PHONY: build test run clean docker-build docker-run
 
-install:
-	$(PY) -m venv $(VENV)
-	$(VENV)/Scripts/pip install --upgrade pip
-	$(VENV)/Scripts/pip install -r requirements.txt
-
-run:
-	uvicorn app.main:app --reload --port 8000
-
-fmt:
-	black app tests
-	isort app tests
-
-lint:
-	flake8 app
-	mypy app
+build:
+	mvn clean package
 
 test:
-	pytest -q
+	mvn test
+
+run:
+	mvn spring-boot:run
+
+clean:
+	mvn clean
+
+docker-build:
+	docker build -t fusion-ia-api .
+
+docker-run:
+	docker run --rm -p 8000:8000 fusion-ia-api

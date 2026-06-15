@@ -1,0 +1,11 @@
+.git
+.idea
+*.iml
+target
+.tools
+.env
+legacy-fastapi
+README.md
+Dockerfile
+.dockerignore
+
