@@ -5,6 +5,7 @@ import com.danielsanoli.fusionia.domain.model.FusionStatus;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public record FusionResponse(
@@ -14,6 +15,8 @@ public record FusionResponse(
         String prompt,
         String imageUrl,
         String provider,
+        String imageContentType,
+        Map<String, Object> metadata,
         String style,
         String dominantColor,
         Long seed,
@@ -27,6 +30,8 @@ public record FusionResponse(
                 fusion.prompt(),
                 fusion.imageUrl(),
                 fusion.provider(),
+                fusion.imageContentType(),
+                fusion.metadata(),
                 fusion.style(),
                 fusion.dominantColor(),
                 fusion.seed(),

@@ -80,6 +80,34 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(response);
     }
 
+    @ExceptionHandler(MissingProviderConfigurationException.class)
+    public ResponseEntity<ErrorResponse> handleMissingProviderConfiguration(MissingProviderConfigurationException exception,
+                                                                            HttpServletRequest request) {
+        ErrorResponse response = new ErrorResponse(
+                Instant.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "PROVIDER_CONFIGURATION_MISSING",
+                exception.getMessage(),
+                request.getRequestURI(),
+                List.of()
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    @ExceptionHandler(ImageGenerationException.class)
+    public ResponseEntity<ErrorResponse> handleImageGeneration(ImageGenerationException exception,
+                                                               HttpServletRequest request) {
+        ErrorResponse response = new ErrorResponse(
+                Instant.now(),
+                HttpStatus.BAD_GATEWAY.value(),
+                "IMAGE_GENERATION_FAILED",
+                exception.getMessage(),
+                request.getRequestURI(),
+                List.of()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(response);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpected(Exception exception,
                                                           HttpServletRequest request) {

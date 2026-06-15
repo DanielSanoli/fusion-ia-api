@@ -42,7 +42,10 @@ public class FusionService {
                 generationResult.status(),
                 generationResult.prompt(),
                 generationResult.imageUrl(),
+                generationResult.imageBase64(),
+                generationResult.imageContentType(),
                 generationResult.provider(),
+                generationResult.metadata(),
                 Instant.now()
         );
 
